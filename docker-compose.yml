@@ -1,0 +1,39 @@
+version: '3.2'
+
+services:
+  webserver:
+    image: geerlingguy/php-apache:7.2
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./:/var/www/html:delegated
+    ports:
+      - 80:80
+    # links:
+    #   - mariadb
+
+  # mariadb:
+    # image: mariadb:10.3
+    # volumes:
+      # - ./docker/dbdata:/var/lib/mysql
+    #   - apps_persistent:/var/lib/mysql
+    # ports:
+    #   - 43306:3306
+    # restart: always
+    # environment:
+      # - TZ=Asia/Jakarta
+      # - MYSQL_USER=apps_data
+      # - MYSQL_PASSWORD=pass_apps_data
+      # - MYSQL_ROOT_PASSWORD=admin_db
+      # - MYSQL_DATABASE=apps_docker
+
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   depends_on:
+  #     - mariadb
+  #   ports:
+  #     - 48181:80
+  #   environment:
+  #     - PMA_HOST=mariadb
+      
+# volumes:
+#   apps_persistent:
